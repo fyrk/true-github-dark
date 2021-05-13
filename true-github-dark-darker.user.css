@@ -6,7 +6,7 @@
 @author      Florian Rädiker
 @homepageURL https://github.com/FlorianRaediker/true-github-dark
 @license     MIT
-@updateURL   https://florianraediker.github.io/true-github-dark/true-github-dark-darker.user.css
+@updateURL   https://raw.githubusercontent.com/FlorianRaediker/true-github-dark/main/true-github-dark-darker.user.css
 ==/UserStyle== */
 @-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|developer|support|vscode-auth)\.)?github\.com/((?!(sponsors)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com") { /* domains from https://github.com/StylishThemes/GitHub-Dark */
 [data-color-mode=dark][data-dark-theme=dark], [data-color-mode=light][data-light-theme=dark] {

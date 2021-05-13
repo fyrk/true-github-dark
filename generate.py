@@ -43,7 +43,7 @@ def create_userstyle(filename, style_name, description, changed_colors_and_wrapp
 @author      Florian Rädiker
 @homepageURL https://github.com/FlorianRaediker/true-github-dark
 @license     MIT
-@updateURL   https://florianraediker.github.io/true-github-dark/{filename}
+@updateURL   https://raw.githubusercontent.com/FlorianRaediker/true-github-dark/main/{filename}
 ==/UserStyle== */
 """)
         f.write("""@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|developer|support|vscode-auth)\\.)?github\\.com/((?!(sponsors)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com") { /* domains from https://github.com/StylishThemes/GitHub-Dark */\n""")
