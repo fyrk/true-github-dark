@@ -1,15 +1,7 @@
 import re
 
+import jinja2
 import requests
-
-r = requests.get("https://github.com")
-css_url = re.search(r"https://github\.githubassets\.com/assets/frameworks-\w+\.css", r.text).group(0)
-print("CSS URL:", css_url)
-r = requests.get(css_url)
-css = r.text
-
-with open("github-style.css", "w") as f:
-    f.write(css)
 
 
 def change_colors(colors, to_new_color):
@@ -29,71 +21,68 @@ def change_colors(colors, to_new_color):
 
     color_properties = ""
     for name, value in changed_colors:
-        color_properties += name + ":" + value + "; "
+        color_properties += name + ":" + value + ";"
     return color_properties
 
 
-def create_userstyle(filename, style_name, description, changed_colors_and_wrappers):
-    with open(filename, "w") as f:
-        f.write(f"""/* ==UserStyle==
-@name        {style_name}
-@description {description}
-@namespace   FlorianRaediker
-@version     1.1.0
-@author      Florian Rädiker
-@homepageURL https://github.com/FlorianRaediker/true-github-dark
-@license     MIT
-@updateURL   https://raw.githubusercontent.com/FlorianRaediker/true-github-dark/main/{filename}
-==/UserStyle== */
-""")
-        f.write("""@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|developer|support|vscode-auth)\\.)?github\\.com/((?!(sponsors)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com") { /* domains from https://github.com/StylishThemes/GitHub-Dark */\n""")
-        for comment, color_properties, wrappers in changed_colors_and_wrappers:
-            if comment:
-                f.write("/* " + comment + " */\n")
-            for start, end in wrappers:
-                f.write(start)
-                f.write(color_properties)
-                f.write(end)
-            f.write("\n")
-        f.write("}\n")
+sites = {}
 
 
-dark_colors = re.search(r"\[data-color-mode=dark]\[data-dark-theme=dark],\[data-color-mode=light]\[data-light-theme=dark]{(.*?)}", css).group(1)
-dark_dimmed_colors = re.search(r"\[data-color-mode=dark]\[data-dark-theme=dark_dimmed],\[data-color-mode=light]\[data-light-theme=dark_dimmed]{(.*?)}", css).group(1)
+for name, url, css_pattern, light_pattern, dark_pattern, dimmed_pattern in (
+        ("github", "https://github.com", r"https://github\.githubassets\.com/assets/frameworks-\w+\.css",
+         r"\[data-light-theme=light]{(.*?)}",
+         r"\[data-dark-theme=dark]{(.*?)}",
+         r"\[data-dark-theme=dark_dimmed]{(.*?)}"),
 
-print("\n\n================\nCHANGE DARK COLORS")
-changed_dark_colors = change_colors(dark_colors,
-                                    lambda r,g,b,m: "#" + f"{round(m):02X}"*3)
-print("\n\n================\nCHANGE DIMMED COLORS")
-changed_dark_dimmed_colors = change_colors(dark_dimmed_colors,
-                                           lambda r,g,b,m: "#" + f"{round(m):02X}"*3)
+        ("github-support", "https://support.github.com", r"https://support-assets\.github\.com/assets/frameworks-\w+\.css",
+         r'\[data-light-theme="light"]{(.*?)}',
+         r'\[data-dark-theme="dark"]{(.*?)}',
+         r'\[data-dark-theme="dark_dimmed"]{(.*?)}'),
 
-print("\n\n================\nDARKEN DARK COLORS")
-darker_dark_colors = change_colors(dark_colors,
-                                   lambda r,g,b,m: "#" + f"{round(m*0.65 if m < 20 else (m*0.75 if m < 64 else m)):02X}"*3)
+        ("github-docs", None, "https://docs.github.com/dist/index.css",
+         r"\[data-dark-theme=light]{(.*?)}",
+         r"\[data-dark-theme=dark]{(.*?)}",
+         r"\[data-dark-theme=dark_dimmed]{(.*?)}"),
 
-dark_wrappers = [
-    ("[data-color-mode=dark][data-dark-theme=dark], [data-color-mode=light][data-light-theme=dark] {\n    ", "\n}\n"),
-    ("@media (prefers-color-scheme: light) { [data-color-mode=auto][data-light-theme=dark] {\n    ", "\n}}\n"),
-    ("@media (prefers-color-scheme: dark) { [data-color-mode=auto][data-dark-theme=dark] {\n    ", "\n}}\n")
-]
-dimmed_wrappers = [
-    ("[data-color-mode=dark][data-dark-theme=dark_dimmed], [data-color-mode=light][data-light-theme=dark_dimmed] {\n    ", "\n}\n"),
-    ("@media (prefers-color-scheme: light) { [data-color-mode=auto][data-light-theme=dark_dimmed] {\n    ", "\n}}\n"),
-    ("@media (prefers-color-scheme: dark) { [data-color-mode=auto][data-dark-theme=dark_dimmed] {\n    ", "\n}}\n")
-]
+        ("github-resources", None, "https://resources.github.com/assets/css/index.css",
+         r'\[data-light-theme="light"]{(.*?)}',
+         r'\[data-dark-theme="dark"]{(.*?)}',
+         r'\[data-dark-theme="dark_dimmed"]{(.*?)}'),
 
-create_userstyle("true-github-dark.user.css",
-                 "True GitHub Dark",
-                 "Change bluish dark colors on GitHub to truly dark",
-                 [
-                     ("Dark colors", changed_dark_colors, dark_wrappers),
-                     ("Dimmed colors", changed_dark_dimmed_colors, dimmed_wrappers)
-                 ])
+):
+    print("\n\n\n########################\n#", name.upper())
+    if url is not None:
+        r = requests.get(url)
+        css_url = re.search(css_pattern, r.text).group(0)
+    else:
+        css_url = css_pattern
+    css = requests.get(css_url).text
 
-create_userstyle("true-github-dark-darker.user.css",
-                 "True GitHub Dark - Darker",
-                 "Change bluish dark colors on GitHub to truly, even darker colors",
-                 [
-                     ("", darker_dark_colors, dark_wrappers)
-                 ])
+    with open("run/" + name + ".css", "w") as f:
+        f.write(css)
+
+    themes = sites[name] = {
+        "light": re.search(light_pattern, css).group(1),
+        "dark": re.search(dark_pattern, css).group(1),
+        "dark_dimmed": re.search(dimmed_pattern, css).group(1)
+    }
+    themes["truly_dark"] = change_colors(themes["dark"], lambda r,g,b,m: "#" + f"{round(m):02X}"*3)
+    themes["truly_dark_dimmed"] = change_colors(themes["dark_dimmed"], lambda r,g,b,m: "#" + f"{round(m):02X}"*3)
+    themes["truly_darker"] = change_colors(themes["dark"], lambda r,g,b,m: "#" + f"{round(m*0.65 if m < 20 else (m*0.75 if m < 64 else m)):02X}"*3)
+
+    for theme in ("light", "dark", "dark_dimmed", "truly_dark", "truly_dark_dimmed", "truly_darker"):
+        themes[theme + "!i"] = themes[theme].replace(";", "!important;")
+
+
+with open("base.user.css.jinja2", "r") as t, open("true-github-dark.user.css", "w") as f:
+    template = jinja2.Template(t.read())
+    f.write(template.render(
+        account_styled_sites=(
+            ('regexp("^https?://(vscode-auth\\.)?github\\.com/((?!(sponsors)).)*$")', sites["github"]),
+            ('domain("support.github.com")', sites["github-support"])
+        ),
+        fixed_styled_sites=(
+            ('domain("docs.github.com")', "docs", sites["github-docs"]),
+            ('domain("resources.github.com")', "resources", sites["github-resources"])
+        )
+    ))

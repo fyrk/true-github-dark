@@ -1,0 +1,115 @@
+/* ==UserStyle==
+@name        True GitHub Dark
+@description Change bluish dark colors on GitHub to truly dark
+@namespace   FlorianRaediker
+@version     2.0.0
+@author      Florian Rädiker
+@homepageURL https://github.com/FlorianRaediker/true-github-dark
+@license     MIT
+@updateURL   https://raw.githubusercontent.com/FlorianRaediker/true-github-dark/main/true-github-dark.user.css
+
+@preprocessor stylus
+@var select github_dark_theme "Dark theme to use on (support.)github.com" ["default:Default", "truly:Truly Dark*", "truly_darker: Truly Darker"]
+@var select github_dimmed_theme "Dimmed theme to use on (support.)github.com" ["default:Default", "truly:Truly Dimmed*"]
+@var select github_auto_theme "Theme to use on (support.)github.com when logged out" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed"]
+@var select docs_theme "Theme to use on docs.github.com" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed"]
+@var select resources_theme "Theme to use on resources.github.com" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed"]
+==/UserStyle== */
+
+{% for document, colors in account_styled_sites %}
+@-moz-document {{ document }} {
+    /* Auto (if user is logged out) */
+    [data-color-mode=auto] {
+        if github_auto_theme == light {
+            {{ colors["light!i"] }}
+        } else if github_auto_theme == dark {
+            {{ colors["dark!i"] }}
+        } else if github_auto_theme == truly_dark {
+            {{ colors["truly_dark!i"] }}
+        } else if github_auto_theme == truly_darker {
+            {{ colors["truly_darker!i"] }}
+        } else if github_auto_theme == dark_dimmed {
+            {{ colors["dark_dimmed!i"] }}
+        } else if github_auto_theme == truly_dark_dimmed {
+            {{ colors["truly_dark_dimmed!i"] }}
+        }
+    }
+
+
+    /* Dark */
+    [data-color-mode=dark][data-dark-theme=dark], [data-color-mode=light][data-light-theme=dark] {
+        if github_dark_theme == truly {
+            {{ colors["truly_dark"] }}
+        } else if github_dark_theme == truly_darker {
+            {{ colors["truly_darker"] }}
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        [data-color-mode=auto][data-light-theme=dark] {
+            if github_dark_theme == truly {
+                {{ colors["truly_dark"] }}
+            } else if github_dark_theme == truly_darker {
+                {{ colors["truly_darker"] }}
+            }
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        [data-color-mode=auto][data-dark-theme=dark] {
+            if github_dark_theme == truly {
+                {{ colors["truly_dark"] }}
+            } else if github_dark_theme == truly_darker {
+                {{ colors["truly_darker"] }}
+            }
+        }
+    }
+
+
+    /* Dimmed */
+    [data-color-mode=dark][data-dark-theme=dark_dimmed], [data-color-mode=light][data-light-theme=dark_dimmed] {
+        if github_dimmed_theme == truly {
+            {{ colors["truly_dark_dimmed"] }}
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        [data-color-mode=auto][data-light-theme=dark_dimmed] {
+            if github_dimmed_theme == truly {
+                {{ colors["truly_dark_dimmed"] }}
+            }
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        [data-color-mode=auto][data-dark-theme=dark_dimmed] {
+            if github_dimmed_theme == truly {
+                {{ colors["truly_dark_dimmed"] }}
+            }
+        }
+    }
+}
+{% endfor %}
+
+
+{% for document, prefix, colors in fixed_styled_sites %}
+@-moz-document {{ document }} {
+    :root {
+        if {{ prefix }}_theme == light {
+            {{ colors["light!i"] }}
+        } else if {{ prefix }}_theme == dark {
+            {{ colors["dark!i"] }}
+        } else if {{ prefix }}_theme == truly_dark {
+            {{ colors["truly_dark!i"] }}
+        } else if {{ prefix }}_theme == truly_darker {
+            {{ colors["truly_darker!i"] }}
+        } else if {{ prefix }}_theme == dark_dimmed {
+            {{ colors["dark_dimmed!i"] }}
+        } else if {{ prefix }}_theme == truly_dark_dimmed {
+            {{ colors["truly_dark_dimmed!i"] }}
+        }
+    }
+}
+{% endfor %}
+
+/* all the theme's color are (probably) (c) GitHub Inc. and are taken from GitHub's CSS files; some colors have been changed (see README) */
