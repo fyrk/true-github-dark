@@ -39,7 +39,7 @@ def create_userstyle(filename, style_name, description, changed_colors_and_wrapp
 @name        {style_name}
 @description {description}
 @namespace   FlorianRaediker
-@version     1.0.0
+@version     1.1.0
 @author      Florian Rädiker
 @homepageURL https://github.com/FlorianRaediker/true-github-dark
 @license     MIT
@@ -58,8 +58,8 @@ def create_userstyle(filename, style_name, description, changed_colors_and_wrapp
         f.write("}\n")
 
 
-dark_colors = re.search(r"\[data-color-mode=dark]\[data-dark-theme=dark]{(.*?)}", css).group(1)
-dark_dimmed_colors = re.search(r"\[data-color-mode=dark]\[data-dark-theme=dark_dimmed]{(.*?)}", css).group(1)
+dark_colors = re.search(r"\[data-color-mode=dark]\[data-dark-theme=dark],\[data-color-mode=light]\[data-light-theme=dark]{(.*?)}", css).group(1)
+dark_dimmed_colors = re.search(r"\[data-color-mode=dark]\[data-dark-theme=dark_dimmed],\[data-color-mode=light]\[data-light-theme=dark_dimmed]{(.*?)}", css).group(1)
 
 print("\n\n================\nCHANGE DARK COLORS")
 changed_dark_colors = change_colors(dark_colors,
@@ -72,30 +72,28 @@ print("\n\n================\nDARKEN DARK COLORS")
 darker_dark_colors = change_colors(dark_colors,
                                    lambda r,g,b,m: "#" + f"{round(m*0.65 if m < 20 else (m*0.75 if m < 64 else m)):02X}"*3)
 
+dark_wrappers = [
+    ("[data-color-mode=dark][data-dark-theme=dark], [data-color-mode=light][data-light-theme=dark] {\n    ", "\n}\n"),
+    ("@media (prefers-color-scheme: light) { [data-color-mode=auto][data-light-theme=dark] {\n    ", "\n}}\n"),
+    ("@media (prefers-color-scheme: dark) { [data-color-mode=auto][data-dark-theme=dark] {\n    ", "\n}}\n")
+]
+dimmed_wrappers = [
+    ("[data-color-mode=dark][data-dark-theme=dark_dimmed], [data-color-mode=light][data-light-theme=dark_dimmed] {\n    ", "\n}\n"),
+    ("@media (prefers-color-scheme: light) { [data-color-mode=auto][data-light-theme=dark_dimmed] {\n    ", "\n}}\n"),
+    ("@media (prefers-color-scheme: dark) { [data-color-mode=auto][data-dark-theme=dark_dimmed] {\n    ", "\n}}\n")
+]
 
 create_userstyle("true-github-dark.user.css",
                  "True GitHub Dark",
                  "Change bluish dark colors on GitHub to truly dark",
                  [
-                     ("Dark colors", changed_dark_colors, [
-                         ("[data-color-mode=dark][data-dark-theme=dark]{\n    ", "\n}\n"),
-                         ("@media (prefers-color-scheme: light){[data-color-mode=auto][data-light-theme=dark]{\n    ", "\n}}\n"),
-                         ("@media (prefers-color-scheme: dark){[data-color-mode=auto][data-dark-theme=dark]{\n    ", "\n}}\n")
-                     ]),
-                     ("Dimmed colors", changed_dark_dimmed_colors, [
-                         ("[data-color-mode=dark][data-dark-theme=dark_dimmed]{\n    ", "\n}\n"),
-                         ("@media (prefers-color-scheme: light){[data-color-mode=auto][data-light-theme=dark_dimmed]{\n    ", "\n}}\n"),
-                         ("@media (prefers-color-scheme: dark){[data-color-mode=auto][data-dark-theme=dark_dimmed] {\n    ", "\n}}\n")
-                     ])
+                     ("Dark colors", changed_dark_colors, dark_wrappers),
+                     ("Dimmed colors", changed_dark_dimmed_colors, dimmed_wrappers)
                  ])
 
 create_userstyle("true-github-dark-darker.user.css",
                  "True GitHub Dark - Darker",
                  "Change bluish dark colors on GitHub to truly, even darker colors",
                  [
-                     ("", darker_dark_colors, [
-                         ("[data-color-mode=dark][data-dark-theme=dark]{\n    ", "\n}\n"),
-                         ("@media (prefers-color-scheme: light){[data-color-mode=auto][data-light-theme=dark]{\n    ", "\n}}\n"),
-                         ("@media (prefers-color-scheme: dark){[data-color-mode=auto][data-dark-theme=dark]{\n    ", "\n}}\n")
-                     ])
+                     ("", darker_dark_colors, dark_wrappers)
                  ])
