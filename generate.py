@@ -78,7 +78,7 @@ with open("base.user.css.jinja2", "r") as t, open("true-github-dark.user.css", "
     template = jinja2.Template(t.read())
     f.write(template.render(
         account_styled_sites=(
-            ('regexp("^https?://(vscode-auth\\.)?github\\.com/((?!(sponsors)).)*$")', sites["github"]),
+            (r'regexp("^https?://((vscode-auth|gist)\.)?github\.com/((?!(sponsors)).)*$")', sites["github"]),
             ('domain("support.github.com")', sites["github-support"])
         ),
         fixed_styled_sites=(
