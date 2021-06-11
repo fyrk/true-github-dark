@@ -4,7 +4,7 @@ import jinja2
 import requests
 
 
-def change_colors(colors, to_new_color):
+def change_colors(colors, to_new_color, include_all=False):
     changed_colors = []
     for color_property in colors.split(";"):
         name, value = color_property.split(":")
@@ -18,6 +18,10 @@ def change_colors(colors, to_new_color):
                 print(f"      change {name+':':40} {value} to {new_value} {(r, g, b, round(mean, 1))}")
             else:
                 print(f"don't change {name+':':40} {value} {(r, g, b, round(mean, 1))}")
+                if include_all:
+                    changed_colors.append((name, value))
+        elif include_all:
+            changed_colors.append((name, value))
 
     color_properties = ""
     for name, value in changed_colors:
@@ -66,12 +70,17 @@ for name, url, css_pattern, light_pattern, dark_pattern, dimmed_pattern in (
         "dark": re.search(dark_pattern, css).group(1),
         "dark_dimmed": re.search(dimmed_pattern, css).group(1)
     }
-    themes["truly_dark"] = change_colors(themes["dark"], lambda r,g,b,m: "#" + f"{round(m):02X}"*3)
-    themes["truly_dark_dimmed"] = change_colors(themes["dark_dimmed"], lambda r,g,b,m: "#" + f"{round(m):02X}"*3)
-    themes["truly_darker"] = change_colors(themes["dark"], lambda r,g,b,m: "#" + f"{round(m*0.65 if m < 20 else (m*0.75 if m < 64 else m)):02X}"*3)
+    make_truly_dark = lambda r,g,b,m: "#" + f"{round(m):02X}"*3
+    make_truly_darker = lambda r,g,b,m: "#" + f"{round(m*0.65 if m < 20 else (m*0.75 if m < 64 else m)):02X}"*3
+    themes["truly_dark"] = change_colors(themes["dark"], make_truly_dark)
+    themes["truly_dark_dimmed"] = change_colors(themes["dark_dimmed"], make_truly_dark)
+    themes["truly_darker"] = change_colors(themes["dark"], make_truly_darker)
 
-    for theme in ("light", "dark", "dark_dimmed", "truly_dark", "truly_dark_dimmed", "truly_darker"):
+    for theme in ("light", "dark", "dark_dimmed"):
         themes[theme + "!i"] = themes[theme].replace(";", "!important;")
+    themes["truly_dark!i"] = change_colors(themes["dark"], make_truly_dark, True)
+    themes["truly_dark_dimmed!i"] = change_colors(themes["dark_dimmed"], make_truly_dark, True)
+    themes["truly_darker!i"] = change_colors(themes["dark"], make_truly_darker, True)
 
 
 with open("base.user.css.jinja2", "r") as t, open("true-github-dark.user.css", "w") as f:
