@@ -78,9 +78,9 @@ for name, url, css_pattern, light_pattern, dark_pattern, dimmed_pattern in (
 
     for theme in ("light", "dark", "dark_dimmed"):
         themes[theme + "!i"] = themes[theme].replace(";", "!important;")
-    themes["truly_dark!i"] = change_colors(themes["dark"], make_truly_dark, True)
-    themes["truly_dark_dimmed!i"] = change_colors(themes["dark_dimmed"], make_truly_dark, True)
-    themes["truly_darker!i"] = change_colors(themes["dark"], make_truly_darker, True)
+    themes["truly_dark!i"] = change_colors(themes["dark"], make_truly_dark, True).replace(";", "!important;")
+    themes["truly_dark_dimmed!i"] = change_colors(themes["dark_dimmed"], make_truly_dark, True).replace(";", "!important;")
+    themes["truly_darker!i"] = change_colors(themes["dark"], make_truly_darker, True).replace(";", "!important;")
 
 
 with open("base.user.css.jinja2", "r") as t, open("true-github-dark.user.css", "w") as f:
