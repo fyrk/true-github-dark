@@ -2,7 +2,7 @@
 @name        True GitHub Dark
 @description Change bluish dark colors on GitHub to truly dark
 @namespace   FlorianRaediker
-@version     2.0.1
+@version     2.1.0
 @author      Florian Rädiker
 @homepageURL https://github.com/FlorianRaediker/true-github-dark
 @license     MIT
@@ -19,7 +19,7 @@
 {% for document, colors in account_styled_sites %}
 @-moz-document {{ document }} {
     /* Auto (if user is logged out) */
-    [data-color-mode=auto] {
+    :root {
         if github_auto_theme == light {
             {{ colors["light!i"] }}
         } else if github_auto_theme == dark {
