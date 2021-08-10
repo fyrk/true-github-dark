@@ -33,17 +33,17 @@ sites = {}
 
 
 for name, url, css_pattern, light_pattern, dark_pattern, dimmed_pattern in (
-        ("github", "https://github.com", r"https://github\.githubassets\.com/assets/frameworks-\w+\.css",
+        ("github", "https://github.com", r"(https://github\.githubassets\.com/assets/frameworks-\w+\.css)",
          r"\[data-light-theme=light]{(.*?)}",
          r"\[data-dark-theme=dark]{(.*?)}",
          r"\[data-dark-theme=dark_dimmed]{(.*?)}"),
 
-        ("github-support", "https://support.github.com", r"https://support-assets\.github\.com/assets/frameworks-\w+\.css",
+        ("github-support", "https://support.github.com", r"(https://support-assets\.github\.com/assets/frameworks-\w+\.css)",
          r'\[data-light-theme="light"]{(.*?)}',
          r'\[data-dark-theme="dark"]{(.*?)}',
          r'\[data-dark-theme="dark_dimmed"]{(.*?)}'),
 
-        ("github-docs", None, "https://docs.github.com/dist/index.css",
+        ("github-docs", "https://docs.github.com", r'rel="stylesheet" href="(/_next/static/css/\w+\.css)" data-n-g=""',
          r"\[data-dark-theme=light]{(.*?)}",
          r"\[data-dark-theme=dark]{(.*?)}",
          r"\[data-dark-theme=dark_dimmed]{(.*?)}"),
@@ -52,12 +52,13 @@ for name, url, css_pattern, light_pattern, dark_pattern, dimmed_pattern in (
          r'\[data-light-theme="light"]{(.*?)}',
          r'\[data-dark-theme="dark"]{(.*?)}',
          r'\[data-dark-theme="dark_dimmed"]{(.*?)}'),
-
 ):
     print("\n\n\n########################\n#", name.upper())
     if url is not None:
         r = requests.get(url)
-        css_url = re.search(css_pattern, r.text).group(0)
+        css_url = re.search(css_pattern, r.text).group(1)
+        if css_url.startswith("/"):
+            css_url = url + css_url
     else:
         css_url = css_pattern
     css = requests.get(css_url).text
