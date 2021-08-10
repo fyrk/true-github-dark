@@ -2,18 +2,18 @@
 @name        True GitHub Dark
 @description Change bluish dark colors on GitHub to truly dark
 @namespace   FlorianRaediker
-@version     2.1.0
+@version     2.1.2
 @author      Florian Rädiker
 @homepageURL https://github.com/FlorianRaediker/true-github-dark
 @license     MIT
 @updateURL   https://raw.githubusercontent.com/FlorianRaediker/true-github-dark/main/true-github-dark.user.css
 
 @preprocessor stylus
-@var select github_dark_theme "Dark theme to use on (support.)github.com" ["default:Default", "truly:Truly Dark*", "truly_darker: Truly Darker"]
+@var select github_dark_theme "Dark theme to use on (support.)github.com" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed", "dark_high_contrast:Dark high contrast"]
 @var select github_dimmed_theme "Dimmed theme to use on (support.)github.com" ["default:Default", "truly:Truly Dimmed*"]
-@var select github_auto_theme "Theme to use on (support.)github.com when logged out" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed"]
-@var select docs_theme "Theme to use on docs.github.com" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed"]
-@var select resources_theme "Theme to use on resources.github.com" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed"]
+@var select github_auto_theme "Theme to use on (support.)github.com when logged out" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed", "dark_high_contrast:Dark high contrast"]
+@var select docs_theme "Theme to use on docs.github.com" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed", "dark_high_contrast:Dark high contrast"]
+@var select resources_theme "Theme to use on resources.github.com" ["default:Default", "light:Light", "dark:Dark", "truly_dark:Truly Dark", "truly_darker:Truly Darker", "dark_dimmed:Dimmed", "truly_dark_dimmed:Truly Dimmed", "dark_high_contrast:Dark high contrast"]
 ==/UserStyle== */
 
 {% for document, colors in account_styled_sites %}
