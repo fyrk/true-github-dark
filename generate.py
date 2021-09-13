@@ -20,13 +20,19 @@ def change_colors(colors, to_new_color, include_all=False):
                 print(f"don't change {name+':':40} {value} {(r, g, b, round(mean, 1))}")
                 if include_all:
                     changed_colors.append((name, value))
-        elif include_all:
+        elif include_all \
+                and "=>" not in value: # some values contain weird code Stylus can't handle, like `(obj) => get_1.default(obj, path)`
             changed_colors.append((name, value))
 
     color_properties = ""
     for name, value in changed_colors:
         color_properties += name + ":" + value + ";"
     return color_properties
+
+
+def clean_css(css):
+    # some values contain weird code Stylus can't handle, like `(obj) => get_1.default(obj, path)`
+    return re.sub(r";[^;]*>[^;]*;", ";", css)
 
 
 sites = {}
@@ -67,9 +73,9 @@ for name, url, css_pattern, light_pattern, dark_pattern, dimmed_pattern in (
         f.write(css)
 
     themes = sites[name] = {
-        "light": re.search(light_pattern, css).group(1),
-        "dark": re.search(dark_pattern, css).group(1),
-        "dark_dimmed": re.search(dimmed_pattern, css).group(1)
+        "light": clean_css(re.search(light_pattern, css).group(1)),
+        "dark": clean_css(re.search(dark_pattern, css).group(1)),
+        "dark_dimmed": clean_css(re.search(dimmed_pattern, css).group(1))
     }
     make_truly_dark = lambda r,g,b,m: "#" + f"{round(m):02X}"*3
     make_truly_darker = lambda r,g,b,m: "#" + f"{round(m*0.65 if m < 20 else (m*0.75 if m < 64 else m)):02X}"*3
