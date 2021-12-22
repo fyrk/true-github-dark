@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="20a1dde9-fc6d-4931-9829-a08f5990b116" name="Default Changelist" comment="Update style">
+      <change beforePath="$PROJECT_DIR$/base.user.css.jinja2" beforeDir="false" afterPath="$PROJECT_DIR$/base.user.css.jinja2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/true-github-dark.user.css" beforeDir="false" afterPath="$PROJECT_DIR$/true-github-dark.user.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1qTjLe9MXmKFh92zni9jGPpoGc6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Markdown" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/run" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/run" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="generate" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="true-github-dark" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.8" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/generate.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.generate" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="20a1dde9-fc6d-4931-9829-a08f5990b116" name="Default Changelist" comment="" />
+      <created>1617110419695</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617110419695</updated>
+      <workItem from="1617110420801" duration="13000" />
+      <workItem from="1617110475883" duration="1077000" />
+      <workItem from="1620850913313" duration="1333000" />
+      <workItem from="1620895515483" duration="8776000" />
+      <workItem from="1620917918527" duration="2549000" />
+      <workItem from="1620928313827" duration="152000" />
+      <workItem from="1621453560520" duration="606000" />
+      <workItem from="1623434622553" duration="3870000" />
+      <workItem from="1623500947111" duration="156000" />
+      <workItem from="1623525282045" duration="28000" />
+      <workItem from="1628598944170" duration="2492000" />
+      <workItem from="1628669690281" duration="353000" />
+      <workItem from="1628692426523" duration="237000" />
+      <workItem from="1629905778417" duration="2000" />
+      <workItem from="1632152443286" duration="199000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1617110687620</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617110687620</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fix links in README">
+      <created>1617110943036</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1617110943036</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update generate.py">
+      <created>1620894512783</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1620894512783</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fix updateURL in generate.py">
+      <created>1620895606076</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1620895606076</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add Stylus options for dark &amp; dimmed theme, and Docs &amp; Resources">
+      <created>1620923393670</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1620923393670</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add support for gist.github.com">
+      <created>1621454623579</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621454623579</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update style and Add support for https://github.com/git-guides">
+      <created>1623437931387</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1623437931387</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Small fix">
+      <created>1623440873399</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1623440873399</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Small fix">
+      <created>1623442190951</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1623442190951</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Small fix">
+      <created>1623442346886</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1623442346886</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update style">
+      <created>1628600722069</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1628600722069</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Fix links in README" />
+    <MESSAGE value="Update generate.py" />
+    <MESSAGE value="Fix updateURL in generate.py" />
+    <MESSAGE value="Add Stylus options for dark &amp; dimmed theme, and Docs &amp; Resources" />
+    <MESSAGE value="Add support for gist.github.com" />
+    <MESSAGE value="Update style and Add support for https://github.com/git-guides" />
+    <MESSAGE value="Small fix" />
+    <MESSAGE value="Update style" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update style" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/true_github_dark$generate.coverage" NAME="generate Coverage Results" MODIFIED="1628600619395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
